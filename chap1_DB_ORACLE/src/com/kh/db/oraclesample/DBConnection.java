@@ -1,6 +1,7 @@
 package com.kh.db.oraclesample;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -32,9 +33,16 @@ public class DBConnection {
 			while(result.next()) {
 				// khbank에 있는 bank 테이블 결과집합에서 account_id를 가져옴
 				int accountID = result.getInt("account_id");
+				//1. 함께해보기 :  accountNumber
+				String accountNumber = result.getString("account_number");
 				String accountName = result.getString("account_name");
 				double balance = result.getDouble("balance");
-				System.out.println("ACCOUNT_ID : " + accountID + ", ACCOUNT_NAME : " + accountName+ ", BALANCE : " + balance);
+				//2. 함께해보기 :  branchName
+				String branchName = result.getString("branch_name");
+				//3. java.sql import Date lastTransctionDate 가져오기
+				Date lastTransactionDate = result.getDate("last_transaction_date");
+				System.out.println("ACCOUNT_ID : " + accountID + ", ACCOUNT_NAME : " + accountName+ ", BALANCE : " + balance
+					+"ACCOUNT_NUMBER"+accountNumber+"BRANCH_NAME"+branchName+"LastTransactionDate : " +lastTransactionDate	);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
