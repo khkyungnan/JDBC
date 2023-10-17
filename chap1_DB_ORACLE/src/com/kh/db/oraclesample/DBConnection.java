@@ -10,7 +10,7 @@ import java.sql.SQLException;
 public class DBConnection {
 
 	public static void main(String[] args) {
-		selectIf();
+		insertBank();
 	}
 	
 	static void selectBank() {
@@ -83,9 +83,10 @@ public class DBConnection {
 			//조건 설정
 			selectState.setInt(1, targetAID);
 			 * */
-			String[] targerAN = {"1234567890","5555666777"};
-			selectState.setString(1, targerAN[0]);
-			selectState.setString(2, targerAN[1]);
+			String[] targetAN = {"1234567890","5555666777"};
+			selectState.setString(1, targetAN[0]);
+			selectState.setString(2, targetAN[1]);
+			
 			ResultSet result = selectState.executeQuery();
 			
 			//값 존재 여부
@@ -104,16 +105,41 @@ public class DBConnection {
 		    	            + " ACCOUNT_NUMBER " + d + " BRANCH_NAME " + e + " LastTransactionDate : " + f);
 			
 			} 
-			 if (!result.isBeforeFirst()) {
-	                System.out.println("데이터 없음");
-	            }
+			 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 	}
+
+	static void insertBank() {
+		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+		String user = "khbank";
+		String password = "kh1234";
+		try {
+			Connection con = DriverManager.getConnection(url, user, password);
+			String inserQuery = "INSERT INTO BANK (account_id, account_number, account_name, balance, branch_name, last_transaction_date)"
+								+ "VALUES (?, ?, ?, ?, ?, ?)";
+			PreparedStatement insertState = con.prepareStatement(inserQuery);
+			insertState.setInt(1, 14);
+			insertState.setString(2, "16533219");
+			insertState.setString(3, "사아자");
+			insertState.setDouble(4, 1500.00);
+			insertState.setString(5,  "kh");
+			insertState.setDate(6, Date.valueOf("2023-10-16"));
+			
+			int rowsInsert = insertState.executeUpdate();
+			System.out.println(rowsInsert + "row 추가됨");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
+
+
+
 
 
 
