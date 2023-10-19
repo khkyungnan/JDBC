@@ -51,20 +51,41 @@ public class cafeView {
 		System.out.println("메뉴 설명이 업데이트 되었습니다.");
 	}
 	
-	
 	public void updateCafe() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("운영시간을 업데이트하세요:");
-        System.out.print("새 운영시간: ");
-        String newOperatingHours = scanner.next();
+        System.out.println("카페 ID를 입력 후, 운영시간을 업데이트하세요:");
         System.out.print("카페 ID: ");
         int cafeId = scanner.nextInt();
-        scanner.nextLine(); // 개행 문자 처리
-     
 
-        model.UpdateCafe(cafeId, newOperatingHours);
+        System.out.print("새 운영시간: ");
+        String newOR = scanner.next();
+      
+        scanner.nextLine(); // 개행 문자 처리
+
+        model.UpdateCafe(newOR,cafeId );
         System.out.println("운영시간이 업데이트되었습니다!");
     }
+
+	public void deleteCafe() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("카페를 삭제하겠습니다.");
+		System.out.println("삭제할 카페의 ID를 입력하세요.");
+		int cafeId = Integer.parseInt(sc.nextLine());
+		//int cafedId_other = sc.nextInt();
+		
+		model.deleteCafe(cafeId);
+		System.out.println("카페가 삭제되었습니다.");
+	}
+
+	public void deleteMenu() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("메뉴를 삭제하세요.");
+		System.out.println("카페ID : ");
+		int cafe_id = sc.nextInt();
+		int menu_id = sc.nextInt();
+		model.deleteMenu(menu_id, cafe_id);
+		System.out.println("메뉴가 삭제되었습니다.");
+	}
 }
 
 

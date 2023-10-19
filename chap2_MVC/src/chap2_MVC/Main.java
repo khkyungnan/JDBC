@@ -9,6 +9,7 @@ public class Main {
 		cafeController controller = new cafeController(model, view);
 		
 		//view.addCafeName();
+		//view.updateMenu();
 		view.updateCafe();
 	}
 }

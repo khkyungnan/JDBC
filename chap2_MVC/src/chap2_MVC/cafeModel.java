@@ -29,9 +29,19 @@ public class cafeModel {
 		}
 	}
 	
-	
-	public void UpdateCafe(int cafeId, String newOperatingHours) {
-		String sql = "UPDATE cafes SET operating_hours = ? WHERE cafe_id = ?";
+	public void UpdateCafe(String operating_hours, int cafeId) {
+		try {
+			Connection con = DriverManager.getConnection(url, username, password);
+			String sql = "UPDATE cafes SET operating_hours = ? WHERE cafe_id = ?";
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setString(1, operating_hours);
+			st.setInt(2,cafeId);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 	
 	public void UpdateMenu(String description, int menuId, int cafeId) {
@@ -47,6 +57,35 @@ public class cafeModel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public void deleteCafe(int cafeId) {
+		try {
+			Connection con = DriverManager.getConnection(url, username, password);
+			String sql = "DELETE FROM cafes WHERE cafe_id = ?";
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setInt(1, cafeId);
+			st.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	
+	public void deleteMenu(int menuId, int cafeId) {
+		try {
+			Connection con = DriverManager.getConnection(url,username,password);
+			String sql = "DELETE FROM menu WHERE menu_id = ? AND cafe_id = ?";
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setInt(1, menuId);
+			st.setInt(2, cafeId);
+			st.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 }
 
