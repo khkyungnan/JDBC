@@ -14,8 +14,8 @@ public class CafeModel {
 	public CafeModel(Connection connection) {
 		this.connection = connection;
 	}
-	
-	public void getCafes() {
+//  public      String   get
+	public List<CafeDTO> getCafes() {
 		List<CafeDTO> cafes = new ArrayList<>();
 		String query = "SELECT * FROM cafes";
 		try {
@@ -42,6 +42,7 @@ public class CafeModel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return cafes;
 	}
 }
 
