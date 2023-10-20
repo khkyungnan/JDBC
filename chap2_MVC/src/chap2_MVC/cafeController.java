@@ -13,32 +13,40 @@ public class cafeController {
 	}
 	// run
 	public void run() {
-        Scanner scanner = new Scanner(System.in);
-        int choice = 0;
-        while (choice != 4) {
-            System.out.println("1. 카페 정보 추가");
-            System.out.println("2. 메뉴 설명 업데이트");
-            System.out.println("3. 운영시간 업데이트");
-            System.out.println("4. 종료");
-            System.out.print("원하는 작업을 선택하세요: ");
-            choice = scanner.nextInt();
-
-            switch (choice) {
-                case 1:
-                    view.addCafeName();
-                    break;
-                case 2:
-                    view.updateMenu();
-                    break;
-                case 3:
-                    view.updateCafe();
-                    break;
-                case 4:
-                    System.out.println("프로그램을 종료합니다.");
-                    break;
-                default:
-                    System.out.println("올바른 옵션을 선택하세요.");
-            }
-        }
-    }
+			Scanner sc = new Scanner(System.in);
+			//선택할 번호 출력 메서드로 입력
+			System.out.println("1. 카페 정보 추가");
+			System.out.println("2. 메뉴 설명 추가");
+			System.out.println("3. 종료");
+			System.out.println("원하는 작업을 선택해주세요.");
+			boolean isTrue = true;
+			int choice = sc.nextInt();
+			while(isTrue) {
+				switch (choice) {
+					case 1:
+						view.addCafeName();
+						break;
+					case 2:
+						view.updateMenu();
+						break;
+					case 3:
+						System.out.println("프로그램을 종료합니다.");
+						isTrue = false;
+						break;
+					default:
+						System.out.println("올바른 번호를 입력하세요.");
+			}
+		}
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
