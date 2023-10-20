@@ -58,7 +58,7 @@ public class ProductModel {
 	public static ProductModel getInstance() throws SQLException {
 		if(productModel == null) {
 			productModel = new ProductModel();
-			connection = DriverManager.getConnection(DB_URL, ID, DB_URL);
+			connection = DriverManager.getConnection(DB_URL, ID, PW);
 			
 		}
 		return productModel;

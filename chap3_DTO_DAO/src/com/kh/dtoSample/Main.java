@@ -7,6 +7,7 @@ import java.sql.SQLException;
 public class Main {
 
 	public static void main(String[] args) {
+		/*
 		//connection 에 연결할 내용 작성
 		// url username password
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
@@ -30,7 +31,11 @@ public class Main {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		*/
 		
+		
+		ProductView view = new ProductView();
+		view.addProduct();
 	}
 
 }
