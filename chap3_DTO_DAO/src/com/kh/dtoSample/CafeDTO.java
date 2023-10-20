@@ -57,12 +57,15 @@ public class CafeDTO {
 	public void setOperatingHours(String operatingHours) {
 		this.operatingHours = operatingHours;
 	}
-	
+
 	// @Override를 활용한 toString 메서드 추가
 	@Override
 	public String toString() {
-		return "CafeDTO";
+		return "CafeDTO"+cafeId+address;
 	}
+	
+	
+
 }
 
 
