@@ -13,9 +13,9 @@ public class ProductMain {
 		
 		try {
 			Connection con = DriverManager.getConnection(jdbcurl, username, password);
-			ProductsView view = new ProductsView();
+			ProductView view = new ProductView();
 			
-			ProductsController controller = new ProductsController(con,view);
+			ProductController controller = new ProductController(con,view);
 			
 			controller.displayAllProducts();
 		} catch (SQLException e) {
