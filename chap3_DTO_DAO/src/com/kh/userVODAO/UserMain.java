@@ -81,9 +81,9 @@ public class UserMain {
 			int userId = Integer.parseInt(input);
 			
 			System.out.println("이메일을 입력해주세요. : ");
-			String userEmail = sc.next();// sc활용
+			String userEmail = sc.nextLine();// sc활용
 			//select 문 출력하기 
-			String sql = "SELECT * FROM USERINFO WHERE user_id = ? AND emil = ?";
+			String sql = "SELECT * FROM USERINFO WHERE user_id = ? AND email = ?";
 			PreparedStatement st = cc.prepareStatement(sql);
 			st.setInt(1, userId);
 			st.setString(2, userEmail);
