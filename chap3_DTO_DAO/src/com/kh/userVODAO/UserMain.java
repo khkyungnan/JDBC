@@ -2,6 +2,8 @@ package com.kh.userVODAO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
@@ -37,9 +39,24 @@ public class UserMain {
 				//break가 없으면 종료되지 않음 종료하겠습니다 만 출력됨
 			}
 			
+			int userId = Integer.parseInt(input);
 			//select 문 출력하기 
-		
+			String sql = "SELECT * FROM USERINFO WHERE user_id = ?";
+			PreparedStatement st = cc.prepareStatement(sql);
+			st.setInt(1, userId);
+			ResultSet rs = st.executeQuery();
 			
+			//selectOne if
+			if(rs.next()) {
+				System.out.println("user ID   : " + rs.getInt("user_id"));
+				System.out.println("UserName  : " + rs.getString("username"));
+				System.out.println("E M A I L : " + rs.getString("email"));
+				System.out.println("Registration Date : " + rs.getDate("reg_date"));
+				System.out.println();
+			} else {
+				System.out.println("일치하는 User Id를 찾을 수 없습니다.");
+				System.out.println();
+			}
 			
 			
 		}
