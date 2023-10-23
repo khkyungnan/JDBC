@@ -16,11 +16,44 @@ public class UserMain {
 		um.selectScanner();
 	}
 	//boolean idTrue = checkId(userId);
-	public boolean checkId() {
+	public boolean checkEmail(String userEmail) throws SQLException {
 		//1. DB연결
+		String jdbcURL = "jdbc:oracle:thin:@localhost:1521:xe";
+		String dbUserName = "khcafe";
+		String dbPassWord = "kh1234";
+		Connection cc = DriverManager.getConnection(jdbcURL, dbUserName, dbPassWord);
+		
+		String sql = "SELECT COUNT(*) FROM USERINFO WHERE email = ?";
+		PreparedStatement st = cc.prepareStatement(sql);
+		st.setString(1, userEmail);
+		ResultSet rs = st.executeQuery();
+		if (rs.next()) {
+			int count = rs.getInt(1);
+			return count > 0; //1이상이면 true
+		}
+		return false;
+	}
+	
+	public boolean checkId(int userId) throws SQLException {
+		//1. DB연결
+		String jdbcURL = "jdbc:oracle:thin:@localhost:1521:xe";
+		String dbUserName = "khcafe";
+		String dbPassWord = "kh1234";
+		Connection cc = DriverManager.getConnection(jdbcURL, dbUserName, dbPassWord);
 		//2. SQL
+		String sql = "Select * From USERINFO where user_id = ?";
+		
+		PreparedStatement st = cc.prepareStatement(sql);
+		st.setInt(1, userId);
 		//3. IF활용해서 Result.next()
+		ResultSet rs = st.executeQuery();
+		if (rs.next()) {
+			int id = rs.getInt(1);
+			return id >0; //이상이면 true
+		}
 		//     return >0 1이상이면 일치
+		
+		return false; //일치하지 않을 때
 	}
 	public void selectScanner() {
 		//1. DB 연결 URL, USERNAME, PASSWORD
