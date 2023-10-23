@@ -25,6 +25,7 @@ public class Bank {
 			System.out.println("전송할 금액을 입력하세요. : ");
 			double amount = sc.nextDouble();
 			
+			c.setAutoCommit(false); //트랜잭션 시작
 			PreparedStatement a = c.prepareStatement("UPDATE BANK SET balance = balance - ? Where account_id = ?");
 			a.setDouble(1, amount);
 			a.setInt(2, fromAccountId);
