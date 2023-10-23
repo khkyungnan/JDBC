@@ -15,7 +15,13 @@ public class UserMain {
 		UserMain um = new UserMain();
 		um.selectScanner();
 	}
-	
+	//boolean idTrue = checkId(userId);
+	public boolean checkId() {
+		//1. DB연결
+		//2. SQL
+		//3. IF활용해서 Result.next()
+		//     return >0 1이상이면 일치
+	}
 	public void selectScanner() {
 		//1. DB 연결 URL, USERNAME, PASSWORD
 		String jdbcURL = "jdbc:oracle:thin:@localhost:1521:xe";
@@ -40,10 +46,14 @@ public class UserMain {
 			}
 			
 			int userId = Integer.parseInt(input);
+			
+			System.out.println("이메일을 입력해주세요. : ");
+			//String userEmail = email;// sc활용
 			//select 문 출력하기 
-			String sql = "SELECT * FROM USERINFO WHERE user_id = ?";
+			String sql = "SELECT * FROM USERINFO WHERE user_id = ? AND emil = ?";
 			PreparedStatement st = cc.prepareStatement(sql);
 			st.setInt(1, userId);
+			//st.setString(2, userEmail);
 			ResultSet rs = st.executeQuery();
 			
 			//selectOne if
@@ -54,8 +64,20 @@ public class UserMain {
 				System.out.println("Registration Date : " + rs.getDate("reg_date"));
 				System.out.println();
 			} else {
-				System.out.println("일치하는 User Id를 찾을 수 없습니다.");
-				System.out.println();
+				//boolean ID or Email 하나가 일치하지 않는 경우 처리
+				boolean idTrue = checkId(userId);
+				boolean emailTrue = checkEmail(userEmail);
+				 if(!idTrue && emailTrue) {
+					 System.out.println("일치하지 않는 User ID 입니다.");
+					 System.out.println();
+				 } else if (idTrue && !emailTrue) {
+					 System.out.println("일치하지 않는 User Email 입니다.");
+					 System.out.println();
+				 } else {
+						System.out.println("일치하는 User Id와 email을 찾을 수 없습니다.");
+						System.out.println();
+				 }
+
 			}
 			
 			
