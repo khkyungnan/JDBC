@@ -4,16 +4,85 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 public class UserMain {
 
 	public static void main(String[] args) {
+		UserMain um = new UserMain();
+		um.selectScanner();
+	}
+	
+	public void selectScanner() {
 		//1. DB 연결 URL, USERNAME, PASSWORD
 		String jdbcURL = "jdbc:oracle:thin:@localhost:1521:xe";
 		String dbUserName = "khcafe";
 		String dbPassWord = "kh1234";
 		
+		try {
+		Connection cc = DriverManager.getConnection(jdbcURL, dbUserName, dbPassWord);
+		Scanner sc = new Scanner(System.in);
+		
+		while(true) {
+			System.out.println("User ID 입력해주세요.");
+			System.out.println("종료하고싶다면 특수문자 제외 [e] 입력");
+			String input = sc.nextLine();
+			
+			//만약에 e를 입력했다면
+			//if("e"==input || "E" == input) {
+			if("e".equalsIgnoreCase(input)) {
+				System.out.println("종료하겠습니다.");
+				break; 
+				//break가 없으면 종료되지 않음 종료하겠습니다 만 출력됨
+			}
+			
+			//select 문 출력하기 
+		
+			
+			
+			
+		}
+		
+		
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+
+
+	public void selectAll() {
+		//1. DB 연결 URL, USERNAME, PASSWORD
+		String jdbcURL = "jdbc:oracle:thin:@localhost:1521:xe";
+		String dbUserName = "khcafe";
+		String dbPassWord = "kh1234";
+		
+		try {
+			Connection connection = DriverManager.getConnection(jdbcURL, dbUserName, dbPassWord);
+			UserDAO userDAO = new UserDAO(connection);
+			
+			List<UserVO> users = userDAO.getAllUsers();
+			
+			for(UserVO u : users) {
+			System.out.println("User ID : " + u.getUserId());
+			System.out.println("User Name : " + u.getUserName());
+			System.out.println("User Email : " + u.getEmail());
+			System.out.println("Registration Date : "+u.getRegDate());
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public void insertRun() {
+		String jdbcURL = "jdbc:oracle:thin:@localhost:1521:xe";
+		String dbUserName = "khcafe";
+		String dbPassWord = "kh1234";
 		try {
 			Connection connection = DriverManager.getConnection(jdbcURL, dbUserName, dbPassWord);
 			UserDAO userDao = new UserDAO(connection);
