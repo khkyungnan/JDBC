@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ProductDAO {
 	private Connection connection;
-	String url = "jdbc:oracle:thin:@localhost.1521:xe";
+	String url = "jdbc:oracle:thin:@localhost:1521:xe";
 	String username = "khcafe";
 	String password = "kh1234";
 	public ProductDAO() {
