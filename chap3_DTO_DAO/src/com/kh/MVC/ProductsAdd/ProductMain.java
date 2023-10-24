@@ -17,6 +17,14 @@ public class ProductMain {
 		double totalPrice = controller.calculateTotalPrice(products);
 		view.showTotalPrice(totalPrice);
 		
+		//力前 眠啊
+		
+		//力芭
+		
+		//搬力
+		
+		
+		
 	}
 
 }
